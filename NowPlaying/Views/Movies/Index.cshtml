@@ -6,9 +6,12 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
 
 @foreach (var item in Model) {
 
@@ -27,10 +30,15 @@
 
 
         <div style="padding: 30px;">
-                <a class="btn btn-primary btn-lg"  asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-            <a class="btn btn-primary btn-lg" asp-action="Details" asp-route-id="@item.Id" asp-route-rating="@item.Rating">Details</a> |
-                <a class="btn btn-primary btn-lg"  asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </div>
+            @if (User.IsInRole("Admin"))
+            {
+                <a class="btn btn-primary btn-lg" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a class="btn btn-primary btn-lg" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            }
+
+            <a class="btn btn-primary btn-lg" asp-action="Details" asp-route-id="@item.Id" asp-route-rating="@item.Rating">Details</a>
+
+        </div>
             </div>
       
 }
