@@ -8,6 +8,7 @@
         public string Rating { get; set; }
         public string RunTime { get; set; }
         public string ImageURL { get; set; }
+        public ICollection<Ticket> Tickets { get; }
 
     }
 }
