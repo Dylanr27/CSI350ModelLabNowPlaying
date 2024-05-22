@@ -21,7 +21,7 @@ Tickets will also belong to a user, and a user will have many tickets. What kind
     ```
         public int Id { get; set; }
         public int Count { get; set; }
-        public string MoveId { get; set; }
+        public int MoveId { get; set; }
         [ForeignKey("MovieId")]
         [ValidateNever]
         public Movie Movie { get; set; }
