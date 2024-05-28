@@ -5,13 +5,15 @@
 }
 
 <h1>Index</h1>
-
-@if (User.IsInRole("Admin"))
-{
     <p>
-        <a asp-action="Create">Create New</a>
+        <a class="btn btn-primary btn-lg" asp-controller="Tickets" asp-action="Index">My Tickets</a>
     </p>
-}
+  @if (User.IsInRole("Admin"))
+            {
+            <p>
+                <a asp-action="Create">Create New</a>
+            </p>
+            }
 
 @foreach (var item in Model) {
 
@@ -32,13 +34,13 @@
         <div style="padding: 30px;">
             @if (User.IsInRole("Admin"))
             {
-                <a class="btn btn-primary btn-lg" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                <a class="btn btn-primary btn-lg" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-primary btn-lg" asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+                <a class="btn btn-primary btn-lg" asp-action="Delete" asp-route-id="@item.Id">Delete</a> 
             }
-
-            <a class="btn btn-primary btn-lg" asp-action="Details" asp-route-id="@item.Id" asp-route-rating="@item.Rating">Details</a>
-
-        </div>
+        
+            <a class="btn btn-primary btn-lg" asp-action="Details" asp-route-id="@item.Id" asp-route-rating="@item.Rating">Details</a> 
+               
+            </div>
             </div>
       
 }

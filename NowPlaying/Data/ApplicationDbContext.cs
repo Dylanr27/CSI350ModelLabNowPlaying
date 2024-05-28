@@ -12,11 +12,18 @@ namespace NowPlaying.Data
 
         }
         public DbSet<Movie> Movies { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
 
         //Seeds our DB
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Movie>()
+            .HasMany(e => e.Tickets)
+            .WithOne(e => e.Movie)
+            .HasForeignKey(e => e.MovieId)
+            .HasPrincipalKey(e => e.Id);
+
             modelBuilder.Entity<Movie>().HasData(
                 new Movie { Id = 1, Title = "Alien", Description = "In deep space, the crew of the commercial starship Nostromo is awakened from their cryo-sleep capsules halfway through their journey home to investigate a distress call from an alien vessel.", Rating = "R", RunTime = "1h 57m", ImageURL = "https://upload.wikimedia.org/wikipedia/en/c/c3/Alien_movie_poster.jpg?20200710234615" },
                 new Movie { Id = 2, Title = "Back to the Future", Description = "In this 1980s sci-fi classic, small-town California teen Marty McFly (Michael J. Fox) is thrown back into the '50s when an experiment by his eccentric scientist friend Doc Brown (Christopher Lloyd) goes awry.", Rating = "PG", RunTime = "1h 56m", ImageURL = "https://upload.wikimedia.org/wikipedia/en/d/d2/Back_to_the_Future.jpg" },
